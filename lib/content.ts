@@ -61,6 +61,23 @@ export async function loadContent(
     options: {
       parseFrontmatter: true,
       scope: { config, ...scope },
+      /**
+       * next-mdx-remote 6 defaults blockJS to true, which strips every
+       * `{expression}` from MDX while leaving components and Markdown intact.
+       * That is silent: the build succeeds and pages render "Insulation work in "
+       * with the town missing. This template's entire fact discipline depends on
+       * prose writing {config.displayName} and {area.name} instead of typing
+       * facts, so the expressions have to run.
+       *
+       * The MDX here is authored in this repo and is never user input, which is
+       * the threat the default guards against. blockDangerousJS stays on, so
+       * eval, Function, process and friends are still refused.
+       *
+       * verify.ts check 19 fails the build if an interpolation ever comes back
+       * empty, so this cannot regress quietly again.
+       */
+      blockJS: false,
+      blockDangerousJS: true,
     },
   })
   return { content, frontmatter: frontmatter ?? {} }

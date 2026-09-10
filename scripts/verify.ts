@@ -530,6 +530,49 @@ async function run() {
     )
   }
 
+  // 19. MDX interpolation actually resolved.
+  {
+    // next-mdx-remote 6 strips `{expression}` from MDX by default (blockJS),
+    // leaving components and Markdown untouched. The build stays green and the
+    // page reads "Insulation work in " with the town silently gone. Nothing
+    // else in this gate looks at whether an interpolation produced text, so a
+    // dependency bump can quietly gut every page. This is that tripwire.
+    const problems: string[] = []
+    if (cfg) {
+      const articleText = (route: string): string | null => {
+        const p = pages.find((x) => x.route === route)
+        if (!p) return null
+        return p.$('article').text().replace(/\s+/g, ' ').trim()
+      }
+      for (const a of cfg.serviceAreas) {
+        const src = path.join(CONTENT, 'areas', `${a.slug}.mdx`)
+        if (!fs.existsSync(src)) continue
+        if (!fs.readFileSync(src, 'utf8').includes('{area.name}')) continue
+        const text = articleText(`/areas/${a.slug}`)
+        if (text === null) continue
+        if (!text.includes(a.name)) {
+          problems.push(`/areas/${a.slug}: content/areas/${a.slug}.mdx interpolates {area.name} but "${a.name}" is absent from the rendered article`)
+        }
+      }
+      for (const s of cfg.services) {
+        const src = path.join(CONTENT, 'services', `${s.slug}.mdx`)
+        if (!fs.existsSync(src)) continue
+        if (!fs.readFileSync(src, 'utf8').includes('{config.displayName}')) continue
+        const text = articleText(`/services/${s.slug}`)
+        if (text === null) continue
+        if (!text.includes(cfg.displayName)) {
+          problems.push(`/services/${s.slug}: MDX interpolates {config.displayName} but "${cfg.displayName}" is absent from the rendered article`)
+        }
+      }
+    }
+    record(
+      19,
+      'MDX {config.*} and {area.*} interpolations render, not stripped',
+      problems.length === 0,
+      problems.length ? problems.slice(0, 6).join('; ') : 'all interpolated names present in rendered articles',
+    )
+  }
+
   // ---------- report ----------
   results.sort((a, b) => a.id - b.id)
   const nameWidth = Math.max(...results.map((r) => r.name.length))
