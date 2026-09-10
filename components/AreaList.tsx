@@ -14,7 +14,7 @@ export default function AreaList({ heading = 'Areas We Serve', exclude }: { head
               href={`/areas/${a.slug}`}
               className="inline-block rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium text-ink hover:border-primary hover:text-primary"
             >
-              {a.name}, {config.primaryState}
+              {a.name}, {a.state ?? config.primaryState}
             </Link>
           </li>
         ))}

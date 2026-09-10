@@ -24,7 +24,7 @@ export function GET() {
     ...c.services.map((s) => `- [${s.name}](${url(`/services/${s.slug}`)}): ${s.shortDescription}`),
     '',
     '## Service areas',
-    ...c.serviceAreas.map((a) => `- [${a.name}, ${c.primaryState}](${url(`/areas/${a.slug}`)})`),
+    ...c.serviceAreas.map((a) => `- [${a.name}, ${a.state ?? c.primaryState}](${url(`/areas/${a.slug}`)})`),
   ]
   if (c.hours) {
     lines.push('', '## Hours', ...c.hours.map((h) => `- ${h.day}: ${formatTime(h.open)} to ${formatTime(h.close)}`))

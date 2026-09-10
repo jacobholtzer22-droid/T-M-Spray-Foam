@@ -25,10 +25,15 @@ export default function ServiceGrid({ heading = 'Our Services', exclude }: Props
                 {String(i + 1).padStart(2, '0')}
               </span>
               <h3 className="font-heading text-2xl font-semibold text-primary-dark group-hover:text-accent md:col-span-4">{s.name}</h3>
-              <p className="text-base leading-relaxed text-muted md:col-span-5">{s.shortDescription}</p>
-              <span className="text-sm font-semibold text-ink md:col-span-2 md:text-right">
-                {s.priceFrom !== null ? `From $${s.priceFrom}` : 'Quoted on site'}
-              </span>
+              <p className={`text-base leading-relaxed text-muted ${s.priceFrom !== null ? 'md:col-span-5' : 'md:col-span-7'}`}>
+                {s.shortDescription}
+              </p>
+              {/* No price, no label. A column of identical "Quoted on site" stubs
+                  reads as placeholder chrome and points at the one thing this
+                  business has not published. The description takes the space. */}
+              {s.priceFrom !== null && (
+                <span className="text-sm font-semibold text-ink md:col-span-2 md:text-right">From ${s.priceFrom}</span>
+              )}
             </Link>
           </li>
         ))}

@@ -57,7 +57,7 @@ export default function Footer() {
             {config.serviceAreas.map((a) => (
               <li key={a.slug}>
                 <Link href={`/areas/${a.slug}`} className="hover:underline">
-                  {a.name}, {config.primaryState}
+                  {a.name}, {a.state ?? config.primaryState}
                 </Link>
               </li>
             ))}

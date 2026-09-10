@@ -37,6 +37,19 @@ const SAMPLE_TOKENS = ['sample-lawn-care', 'Sample Lawn Care']
 
 const PLACEHOLDER_TOKENS = ['TODO', 'TKTK', 'Lorem', '[CITY]', '[SERVICE]', 'EXAMPLE_', 'your business', 'Insert ']
 
+/**
+ * Used by check 18 to catch a state abbreviation smuggled into a service area
+ * name. An area's state belongs in its `state` field: putting it in the name
+ * renders "Evansville, IN, IL", because every render site appends the resolved
+ * state after the name. Matched as a standalone uppercase token, so ordinary
+ * title-case town names ("Marion", "O'Fallon", "Mount Carmel") cannot trip it.
+ */
+const US_STATE_ABBREVIATIONS = [
+  'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS',
+  'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC',
+  'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY',
+]
+
 /** Every schema.org type this template can legitimately emit. Anything else is rejected, not warned about. */
 const TYPE_ALLOWLIST = new Set<string>([
   ...SCHEMA_TYPES,
@@ -466,6 +479,55 @@ async function run() {
       })
     }
     record(17, 'every internal link resolves to a built route', problems.size === 0, [...problems].slice(0, 8).join('; '))
+  }
+
+  // 18. Every service area resolves to a state, and no area name carries one itself.
+  {
+    const problems: string[] = []
+    if (!cfg) {
+      problems.push('config did not parse, so service areas could not be checked')
+    } else {
+      const abbrevRe = new RegExp(`\\b(${US_STATE_ABBREVIATIONS.join('|')})\\b`)
+      for (const a of cfg.serviceAreas) {
+        const resolved = a.state ?? cfg.primaryState
+        if (!/^[A-Z]{2}$/.test(resolved)) {
+          problems.push(
+            `${a.slug}: resolves to state "${resolved}", expected two uppercase letters (area.state ?? config.primaryState)`,
+          )
+        }
+        if (a.name.includes(',')) {
+          problems.push(`${a.slug}: name "${a.name}" contains a comma; the state renders from the state field, not the name`)
+        }
+        const hit = a.name.match(abbrevRe)
+        if (hit) {
+          problems.push(`${a.slug}: name "${a.name}" contains state abbreviation "${hit[1]}"; move it to the state field`)
+        }
+      }
+    }
+    // Config alone is not enough. Six separate places render an area beside a
+    // state, and a component that forgets the fallback prints "Evansville, IL"
+    // on a live page while the config is perfectly correct. That happened, and
+    // only a screenshot caught it. Scan the rendered text of every built page
+    // for any out-of-state area paired with the wrong state.
+    const outOfState = cfg ? cfg.serviceAreas.filter((a) => a.state && a.state !== cfg.primaryState) : []
+    if (cfg && outOfState.length && pages.length) {
+      for (const p of pages) {
+        const text = p.$('body').text().replace(/\s+/g, ' ')
+        for (const a of outOfState) {
+          const wrong = `${a.name}, ${cfg.primaryState}`
+          if (text.includes(wrong)) problems.push(`${p.route}: renders "${wrong}" but ${a.name} is in ${a.state}`)
+        }
+      }
+    }
+    record(
+      18,
+      'every service area resolves to a state; no area name carries a comma or state abbreviation',
+      problems.length === 0,
+      problems.length
+        ? problems.slice(0, 8).join('; ')
+        : `${cfg?.serviceAreas.length ?? 0} areas, primary ${cfg?.primaryState ?? '?'}` +
+          (outOfState.length ? `, out of state: ${outOfState.map((a) => `${a.name} ${a.state}`).join(', ')}` : ''),
+    )
   }
 
   // ---------- report ----------

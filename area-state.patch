@@ -1,0 +1,166 @@
+diff --git a/app/areas/[slug]/page.tsx b/app/areas/[slug]/page.tsx
+index bc86b42..a2a85ce 100644
+--- a/app/areas/[slug]/page.tsx
++++ b/app/areas/[slug]/page.tsx
+@@ -30,9 +30,11 @@ export default async function AreaPage({ params }: { params: { slug: string } })
+   const area = getArea(params.slug)
+   if (!area) notFound()
+   const { content } = await loadContent(`areas/${area.slug}.mdx`, { area })
++  // Areas inside primaryState carry state: null and resolve to it, so they render unchanged.
++  const areaState = area.state ?? config.primaryState
+   const crumbs = [
+     { name: 'Home', path: '/' },
+-    { name: `${area.name}, ${config.primaryState}`, path: `/areas/${area.slug}` },
++    { name: `${area.name}, ${areaState}`, path: `/areas/${area.slug}` },
+   ]
+ 
+   return (
+@@ -41,7 +43,7 @@ export default async function AreaPage({ params }: { params: { slug: string } })
+       <JsonLd data={breadcrumbList(crumbs)} />
+ 
+       <PageHeader
+-        title={`${config.primaryService.name} in ${area.name}, ${config.primaryState}`}
++        title={`${config.primaryService.name} in ${area.name}, ${areaState}`}
+         intro={area.county ? `Serving ${area.name} and the rest of ${area.county}.` : undefined}
+         crumbs={crumbs}
+       />
+diff --git a/lib/config-schema.ts b/lib/config-schema.ts
+index 90a778e..8aadd62 100644
+--- a/lib/config-schema.ts
++++ b/lib/config-schema.ts
+@@ -96,6 +96,20 @@ export const siteConfigSchema = z
+           slug,
+           name: z.string().min(2),
+           county: z.string().nullable(),
++          /**
++           * Two-letter state, for areas outside primaryState only.
++           *
++           * Omit it or leave it null for every area inside primaryState: the
++           * field defaults to null and each render site falls back to
++           * config.primaryState, so those areas render exactly as they did
++           * before this field existed.
++           *
++           * Set it when a service area crosses a state line. The state is NEVER
++           * part of `name`: "Evansville" with state "IN", never "Evansville, IN",
++           * which would render as "Evansville, IN, IL". verify.ts check 18
++           * enforces both halves of that rule.
++           */
++          state: z.string().length(2).nullable().default(null),
+         }),
+       )
+       .min(1),
+diff --git a/lib/schema.ts b/lib/schema.ts
+index 90ca585..bce74fb 100644
+--- a/lib/schema.ts
++++ b/lib/schema.ts
+@@ -37,8 +37,20 @@ function heroImageUrl(c: SiteConfig): string | null {
+   return c.images.hero && hasImage(c.images.hero) ? absolute(getImage(c.images.hero).src) : null
+ }
+ 
++/**
++ * A bare `{ '@type': 'City', name }` is ambiguous once a site serves more than one
++ * state: there are Nashvilles, Marions and Salems in many of them. Each city is
++ * wrapped in its containing state so the area is unambiguous to a consumer.
++ *
++ * `AdministrativeArea` is used rather than the narrower `State` because it is
++ * already on verify.ts's type allowlist, so this needs no change to check 9.
++ */
+ function areaServed(areas: readonly ServiceArea[]): Json[] {
+-  return areas.map((a) => ({ '@type': 'City', name: a.name }))
++  return areas.map((a) => ({
++    '@type': 'City',
++    name: a.name,
++    containedInPlace: { '@type': 'AdministrativeArea', name: a.state ?? config.primaryState },
++  }))
+ }
+ 
+ function aggregateRating(c: SiteConfig): Json {
+diff --git a/lib/seo.ts b/lib/seo.ts
+index 0f9ea38..75ba86f 100644
+--- a/lib/seo.ts
++++ b/lib/seo.ts
+@@ -45,7 +45,8 @@ export function buildTitle(args: Pick<BuildMetadataArgs, 'kind' | 'service' | 'a
+       return `${args.service.name} in ${primaryCity} | ${displayName}`
+     case 'area':
+       if (!args.area) throw new Error('buildTitle: kind "area" needs an area')
+-      return `${primaryService.name} in ${args.area.name}, ${primaryState} | ${displayName}`
++      // Areas inside primaryState carry state: null and resolve to it, so they render unchanged.
++      return `${primaryService.name} in ${args.area.name}, ${args.area.state ?? primaryState} | ${displayName}`
+     case 'services':
+       return `All Services in ${primaryCity} | ${displayName}`
+     case 'about':
+@@ -74,7 +75,7 @@ export function defaultDescription(args: Pick<BuildMetadataArgs, 'kind' | 'servi
+     case 'service':
+       return `${args.service?.shortDescription ?? ''} Serving ${primaryCity}, ${primaryState}. Call ${displayName} at ${phoneDisplay} for a free quote.`
+     case 'area':
+-      return `${displayName} offers ${list} in ${args.area?.name ?? primaryCity}, ${primaryState}. Local crew, clear quotes, and reliable scheduling. Call ${phoneDisplay} to get started.`
++      return `${displayName} offers ${list} in ${args.area?.name ?? primaryCity}, ${args.area?.state ?? primaryState}. Local crew, clear quotes, and reliable scheduling. Call ${phoneDisplay} to get started.`
+     case 'services':
+       return `See every service ${displayName} offers in ${primaryCity}, ${primaryState}: ${list}. Each page explains what is included and answers common questions.`
+     case 'about':
+diff --git a/scripts/verify.ts b/scripts/verify.ts
+index 7b12062..c60eadc 100644
+--- a/scripts/verify.ts
++++ b/scripts/verify.ts
+@@ -37,6 +37,19 @@ const SAMPLE_TOKENS = ['sample-lawn-care', 'Sample Lawn Care']
+ 
+ const PLACEHOLDER_TOKENS = ['TODO', 'TKTK', 'Lorem', '[CITY]', '[SERVICE]', 'EXAMPLE_', 'your business', 'Insert ']
+ 
++/**
++ * Used by check 18 to catch a state abbreviation smuggled into a service area
++ * name. An area's state belongs in its `state` field: putting it in the name
++ * renders "Evansville, IN, IL", because every render site appends the resolved
++ * state after the name. Matched as a standalone uppercase token, so ordinary
++ * title-case town names ("Marion", "O'Fallon", "Mount Carmel") cannot trip it.
++ */
++const US_STATE_ABBREVIATIONS = [
++  'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS',
++  'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC',
++  'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY',
++]
++
+ /** Every schema.org type this template can legitimately emit. Anything else is rejected, not warned about. */
+ const TYPE_ALLOWLIST = new Set<string>([
+   ...SCHEMA_TYPES,
+@@ -468,6 +481,41 @@ async function run() {
+     record(17, 'every internal link resolves to a built route', problems.size === 0, [...problems].slice(0, 8).join('; '))
+   }
+ 
++  // 18. Every service area resolves to a state, and no area name carries one itself.
++  {
++    const problems: string[] = []
++    if (!cfg) {
++      problems.push('config did not parse, so service areas could not be checked')
++    } else {
++      const abbrevRe = new RegExp(`\\b(${US_STATE_ABBREVIATIONS.join('|')})\\b`)
++      for (const a of cfg.serviceAreas) {
++        const resolved = a.state ?? cfg.primaryState
++        if (!/^[A-Z]{2}$/.test(resolved)) {
++          problems.push(
++            `${a.slug}: resolves to state "${resolved}", expected two uppercase letters (area.state ?? config.primaryState)`,
++          )
++        }
++        if (a.name.includes(',')) {
++          problems.push(`${a.slug}: name "${a.name}" contains a comma; the state renders from the state field, not the name`)
++        }
++        const hit = a.name.match(abbrevRe)
++        if (hit) {
++          problems.push(`${a.slug}: name "${a.name}" contains state abbreviation "${hit[1]}"; move it to the state field`)
++        }
++      }
++    }
++    const outOfState = cfg ? cfg.serviceAreas.filter((a) => a.state && a.state !== cfg.primaryState) : []
++    record(
++      18,
++      'every service area resolves to a state; no area name carries a comma or state abbreviation',
++      problems.length === 0,
++      problems.length
++        ? problems.slice(0, 8).join('; ')
++        : `${cfg?.serviceAreas.length ?? 0} areas, primary ${cfg?.primaryState ?? '?'}` +
++          (outOfState.length ? `, out of state: ${outOfState.map((a) => `${a.name} ${a.state}`).join(', ')}` : ''),
++    )
++  }
++
+   // ---------- report ----------
+   results.sort((a, b) => a.id - b.id)
+   const nameWidth = Math.max(...results.map((r) => r.name.length))

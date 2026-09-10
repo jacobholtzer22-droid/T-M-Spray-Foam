@@ -43,6 +43,7 @@ export default async function ServicePage({ params }: { params: { slug: string }
   if (!service) notFound()
   const { content } = await loadContent(`services/${service.slug}.mdx`, { service })
   const crumbs = crumbsFor(service.name, service.slug)
+  const hasAside = Boolean(service.image) || service.priceFrom !== null || Boolean(service.priceNote)
 
   return (
     <>
@@ -52,8 +53,19 @@ export default async function ServicePage({ params }: { params: { slug: string }
 
       <PageHeader title={`${service.name} in ${config.primaryCity}`} intro={service.shortDescription} crumbs={crumbs} />
 
-      <div className="mx-auto grid max-w-page gap-10 px-4 pt-10 sm:px-6 lg:grid-cols-3">
-        <article className="lg:col-span-2">{content}</article>
+      {/* A service with no image and no pricing has nothing to put in the aside.
+          Rendering the 2/3 + 1/3 grid anyway squeezes the body copy for no reason
+          and leaves a dead column, which is the single thing that most made this
+          page look unfinished. Fall back to a single measured column. */}
+      <div
+        className={
+          hasAside
+            ? 'mx-auto grid max-w-page gap-10 px-4 pt-10 sm:px-6 lg:grid-cols-3'
+            : 'mx-auto max-w-3xl px-4 pt-10 sm:px-6'
+        }
+      >
+        <article className={hasAside ? 'lg:col-span-2' : ''}>{content}</article>
+        {hasAside && (
         <aside className="space-y-6">
           {service.image && (
             <div className="overflow-hidden rounded-site">
@@ -74,6 +86,7 @@ export default async function ServicePage({ params }: { params: { slug: string }
             </div>
           )}
         </aside>
+        )}
       </div>
 
       <FaqAccordion faqs={service.faqs} heading={`${service.name} Questions`} />

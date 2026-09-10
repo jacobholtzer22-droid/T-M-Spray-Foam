@@ -96,6 +96,20 @@ export const siteConfigSchema = z
           slug,
           name: z.string().min(2),
           county: z.string().nullable(),
+          /**
+           * Two-letter state, for areas outside primaryState only.
+           *
+           * Omit it or leave it null for every area inside primaryState: the
+           * field defaults to null and each render site falls back to
+           * config.primaryState, so those areas render exactly as they did
+           * before this field existed.
+           *
+           * Set it when a service area crosses a state line. The state is NEVER
+           * part of `name`: "Evansville" with state "IN", never "Evansville, IN",
+           * which would render as "Evansville, IN, IL". verify.ts check 18
+           * enforces both halves of that rule.
+           */
+          state: z.string().length(2).nullable().default(null),
         }),
       )
       .min(1),

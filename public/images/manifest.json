@@ -1,53 +1,761 @@
 {
-  "sample-cleanup.jpg": {
-    "width": 1600,
-    "height": 1200,
-    "alt": "Sample placeholder graphic in autumn brown and gold tones standing in for a seasonal cleanup photo",
-    "base": "sample-cleanup",
-    "sizes": [
-      640,
-      1024
-    ]
-  },
-  "sample-crew.jpg": {
-    "width": 1200,
-    "height": 1500,
-    "alt": "Sample placeholder graphic in slate blue tones, portrait orientation, standing in for a crew photo",
-    "base": "sample-crew",
-    "sizes": [
-      640,
-      1024
-    ]
-  },
-  "sample-hero.jpg": {
-    "width": 2000,
-    "height": 1333,
-    "alt": "Sample placeholder graphic in green tones with diagonal stripes standing in for a hero lawn photo",
-    "base": "sample-hero",
+  "IMG_5693.jpg": {
+    "width": 5712,
+    "height": 4284,
+    "alt": "White sprayed foam across a pole barn gable ceiling with timber purlins and strip lights",
+    "base": "img-5693",
     "sizes": [
       640,
       1024,
       1920
     ]
   },
-  "sample-mowing.jpg": {
-    "width": 1600,
-    "height": 1200,
-    "alt": "Sample placeholder graphic in bright green tones standing in for a freshly mowed lawn photo",
-    "base": "sample-mowing",
+  "IMG_5696.jpg": {
+    "width": 5712,
+    "height": 4284,
+    "alt": "Smooth white foam covering a barn roof deck with a dark timber beam across the span",
+    "base": "img-5696",
     "sizes": [
       640,
-      1024
+      1024,
+      1920
     ]
   },
-  "sample-mulch.jpg": {
-    "width": 1600,
-    "height": 1200,
-    "alt": "Sample placeholder graphic in brown tones standing in for a mulched landscape bed photo",
-    "base": "sample-mulch",
+  "IMG_5697.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Large dark ceiling fan under a foamed barn ceiling, garage door open to green trees",
+    "base": "img-5697",
     "sizes": [
       640,
-      1024
+      1024,
+      1920
+    ]
+  },
+  "IMG_5698.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Foamed gable ceiling above steel wall panels with a red exit sign glowing below",
+    "base": "img-5698",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5699.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Foamed barn ceiling above a newly framed doorway opening and steel wall panels",
+    "base": "img-5699",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5700.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Worker in a white shirt beside yellow rolling scaffold under a freshly foamed ceiling",
+    "base": "img-5700",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5713.jpg": {
+    "width": 5712,
+    "height": 4284,
+    "alt": "Bare timber studs against unfinished steel wall panels before any insulation is applied",
+    "base": "img-5713",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5714.jpg": {
+    "width": 5712,
+    "height": 4284,
+    "alt": "Empty framed room with bare studs, concrete floor and a single hanging bulb",
+    "base": "img-5714",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5715.jpg": {
+    "width": 5712,
+    "height": 4284,
+    "alt": "Sloped attic space with dark timber rafters, steel roof panels and a window at the far end",
+    "base": "img-5715",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5719.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Cream foam filling every stud bay of a wall above a bare concrete floor",
+    "base": "img-5719",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5720.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Worker kneeling in a white shirt below a sloping ceiling filled with cream foam",
+    "base": "img-5720",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5721.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Cream foam packed between sloping rafters with dark timber edges left clean",
+    "base": "img-5721",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5722.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Textured cream foam along a low sloping roof with a cable running across the bays",
+    "base": "img-5722",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5723.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Close view of rough cream foam filling narrow rafter bays up to the timber face",
+    "base": "img-5723",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5724.jpg": {
+    "width": 5712,
+    "height": 4284,
+    "alt": "Foamed stud wall filling every bay in a room lit by two bare hanging bulbs",
+    "base": "img-5724",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5817.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Fresh ceiling framing and collar ties below a pale foamed roof in a new build",
+    "base": "img-5817",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5818.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Foamed roof deck seen through new timber bracing crossing an open span",
+    "base": "img-5818",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5822.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Framed room with a finished drywall ceiling, orange wall grille and a yellow strap hanging",
+    "base": "img-5822",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5823.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Timber framed opening looking through into a foamed room with a bright window beyond",
+    "base": "img-5823",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5824.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "New roof trusses over a foamed ceiling with a red lifting frame standing below",
+    "base": "img-5824",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5827.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Foamed wall between a wooden door and a small window with hose coiled on the floor",
+    "base": "img-5827",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_5829.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Framed loft under a drywall ceiling with an orange grille and coiled hoses below",
+    "base": "img-5829",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6100.jpg": {
+    "width": 5712,
+    "height": 4284,
+    "alt": "Pale foam sprayed across a steel building roof with purlins running the full span",
+    "base": "img-6100",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6101.jpg": {
+    "width": 5712,
+    "height": 4284,
+    "alt": "Foamed steel roof deck meeting timber framing along the far wall of a workshop",
+    "base": "img-6101",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6102.jpg": {
+    "width": 5712,
+    "height": 4284,
+    "alt": "Person walking through a steel building below a fully foamed curved roof deck",
+    "base": "img-6102",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6103.jpg": {
+    "width": 5712,
+    "height": 4284,
+    "alt": "Foamed steel building roof with the end door rolled open onto autumn trees",
+    "base": "img-6103",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6120.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Pole barn framing with a foil duct overhead, windows and a red panel on the wall",
+    "base": "img-6120",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6122.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Bare timber framing across steel walls with six windows and a duct near the roof",
+    "base": "img-6122",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6123.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Green scissor lift and plastic sheeting inside a barn part way through framing",
+    "base": "img-6123",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6124.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Foil ducting and plastic sheeting above a covered floor with a green lift alongside",
+    "base": "img-6124",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6219.jpg": {
+    "width": 5712,
+    "height": 4284,
+    "alt": "Foamed walls and timber trusses around a dark red membrane panel on the end wall",
+    "base": "img-6219",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6221.jpg": {
+    "width": 5712,
+    "height": 4284,
+    "alt": "Foamed ceiling and joists meeting red membrane panels on the wall below",
+    "base": "img-6221",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6222.jpg": {
+    "width": 5712,
+    "height": 4284,
+    "alt": "Foamed room with a doorway open to snow outside and a person standing beyond",
+    "base": "img-6222",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6223.jpg": {
+    "width": 5712,
+    "height": 4284,
+    "alt": "Dim interior with plastic sheeting, foamed framing and light through a far opening",
+    "base": "img-6223",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6226.jpeg": {
+    "width": 4032,
+    "height": 3024,
+    "alt": "Warm evening light across a foamed stud wall above a bare plywood floor",
+    "base": "img-6226",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6227.jpeg": {
+    "width": 4032,
+    "height": 3024,
+    "alt": "Foamed stud wall around a window, low sun casting orange light across the plywood floor",
+    "base": "img-6227",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6228.jpeg": {
+    "width": 4032,
+    "height": 3024,
+    "alt": "Rough foam across a ceiling between rafters, lit warm orange by low sunlight",
+    "base": "img-6228",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6229.jpeg": {
+    "width": 4032,
+    "height": 3024,
+    "alt": "Foamed ceiling and rafters under warm light with a duct running along the wall",
+    "base": "img-6229",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6245.jpeg": {
+    "width": 3024,
+    "height": 4032,
+    "alt": "White lined barn walls and ceiling with dark clips, lit by long strip lights",
+    "base": "img-6245",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6248.jpeg": {
+    "width": 3024,
+    "height": 4032,
+    "alt": "White lined barn interior with a blue spray hose coiled across the covered floor",
+    "base": "img-6248",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6249.jpeg": {
+    "width": 3024,
+    "height": 4032,
+    "alt": "Green scissor lift carrying a covered machine inside a barn lined in white sheeting",
+    "base": "img-6249",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6250.jpeg": {
+    "width": 3024,
+    "height": 4032,
+    "alt": "Lined barn ceiling and walls with a door opener motor mounted on the timber above",
+    "base": "img-6250",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6251.jpeg": {
+    "width": 3024,
+    "height": 4032,
+    "alt": "Empty barn bay lined in white with strip lights running along the timber purlins",
+    "base": "img-6251",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6252.jpeg": {
+    "width": 3024,
+    "height": 4032,
+    "alt": "Lined barn interior with an overhead door and its track running along the wall",
+    "base": "img-6252",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6350.jpeg": {
+    "width": 4032,
+    "height": 3024,
+    "alt": "Foamed wall of a new room with drywall sheets stacked and scaffolding to one side",
+    "base": "img-6350",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6351.jpeg": {
+    "width": 4032,
+    "height": 3024,
+    "alt": "Foamed stud wall with two windows onto bare winter fields and a panel on the floor",
+    "base": "img-6351",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6352.jpeg": {
+    "width": 4032,
+    "height": 3024,
+    "alt": "Corner of a foamed room with windows onto open fields and plywood sheets laid down",
+    "base": "img-6352",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6355.jpeg": {
+    "width": 4032,
+    "height": 3024,
+    "alt": "Foamed wall bays framing a single window that looks out over a bare winter field",
+    "base": "img-6355",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6415.jpeg": {
+    "width": 8064,
+    "height": 6048,
+    "alt": "Smooth foamed walls meeting at a corner with green tape along the trim lines",
+    "base": "img-6415",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6416.jpeg": {
+    "width": 8064,
+    "height": 6048,
+    "alt": "Foamed wall around a black entry door and window with blue and green masking in place",
+    "base": "img-6416",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6417.jpeg": {
+    "width": 8064,
+    "height": 6048,
+    "alt": "Room part way through insulating with bare studs, step ladders and two workers",
+    "base": "img-6417",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6591.jpeg": {
+    "width": 8064,
+    "height": 6048,
+    "alt": "Foamed walls and roof of a workshop with a fridge and wire shelving against the wall",
+    "base": "img-6591",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6592.jpeg": {
+    "width": 8064,
+    "height": 6048,
+    "alt": "Foamed wall behind a mounted fan above a bench of buckets and supplies",
+    "base": "img-6592",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6593.jpeg": {
+    "width": 8064,
+    "height": 6048,
+    "alt": "Foamed wall around a doorway opening onto a covered area with a picnic table",
+    "base": "img-6593",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6594.jpeg": {
+    "width": 8064,
+    "height": 6048,
+    "alt": "Foamed wall beside a rolled up steel door with a grey bin on the concrete floor",
+    "base": "img-6594",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6778.jpeg": {
+    "width": 8064,
+    "height": 6048,
+    "alt": "Smooth cream foam covering two walls of an empty room below a white metal ceiling",
+    "base": "img-6778",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6779.jpeg": {
+    "width": 8064,
+    "height": 6048,
+    "alt": "Cream foamed walls of an empty room with a dark doorway in the far corner",
+    "base": "img-6779",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_6780.jpeg": {
+    "width": 8064,
+    "height": 6048,
+    "alt": "Work light on a stand lighting the cream foamed walls of an empty finished room",
+    "base": "img-6780",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_7958.jpeg": {
+    "width": 6048,
+    "height": 8064,
+    "alt": "Pole barn framing with plastic sheeting over the floor and a white door at the far end",
+    "base": "img-7958",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_7959.jpeg": {
+    "width": 6048,
+    "height": 8064,
+    "alt": "Bare framing and diagonal bracing below a steel roof deck in an open bay",
+    "base": "img-7959",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_7960.jpeg": {
+    "width": 6048,
+    "height": 8064,
+    "alt": "Timber framing under a steel roof with daylight through two windows on the far wall",
+    "base": "img-7960",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_8711.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Cream foam sprayed across a wall between timber girts with pipework at the corner",
+    "base": "img-8711",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_8714.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Foamed roof slope running down to black steel trusses in a tall open building",
+    "base": "img-8714",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_8715.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Sunlight falling across a foamed wall beside a small window in a timber framed room",
+    "base": "img-8715",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_8716.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Foamed walls below a timber plank ceiling with a window and foam trimmings on the floor",
+    "base": "img-8716",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_8717.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Foamed wall and window with open timber framing and a sawhorse on the floor",
+    "base": "img-8717",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_8773.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Foamed roof deck above new timber framing with a foil duct and blue outlet box",
+    "base": "img-8773",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_8775.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Foamed roof above new trusses and framing with foil ducts and a row of windows",
+    "base": "img-8775",
+    "sizes": [
+      640,
+      1024,
+      1920
+    ]
+  },
+  "IMG_8776.jpg": {
+    "width": 4284,
+    "height": 5712,
+    "alt": "Foamed roof and trusses above framing with three windows and a red ladder below",
+    "base": "img-8776",
+    "sizes": [
+      640,
+      1024,
+      1920
     ]
   }
 }

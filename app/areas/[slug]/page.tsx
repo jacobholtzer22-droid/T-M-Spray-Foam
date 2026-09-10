@@ -30,9 +30,11 @@ export default async function AreaPage({ params }: { params: { slug: string } })
   const area = getArea(params.slug)
   if (!area) notFound()
   const { content } = await loadContent(`areas/${area.slug}.mdx`, { area })
+  // Areas inside primaryState carry state: null and resolve to it, so they render unchanged.
+  const areaState = area.state ?? config.primaryState
   const crumbs = [
     { name: 'Home', path: '/' },
-    { name: `${area.name}, ${config.primaryState}`, path: `/areas/${area.slug}` },
+    { name: `${area.name}, ${areaState}`, path: `/areas/${area.slug}` },
   ]
 
   return (
@@ -41,7 +43,7 @@ export default async function AreaPage({ params }: { params: { slug: string } })
       <JsonLd data={breadcrumbList(crumbs)} />
 
       <PageHeader
-        title={`${config.primaryService.name} in ${area.name}, ${config.primaryState}`}
+        title={`${config.primaryService.name} in ${area.name}, ${areaState}`}
         intro={area.county ? `Serving ${area.name} and the rest of ${area.county}.` : undefined}
         crumbs={crumbs}
       />

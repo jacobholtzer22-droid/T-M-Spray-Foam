@@ -43,26 +43,42 @@ export interface Theme {
   shadow: string
 }
 
-// Shipped default follows the "Cultivated" direction for the lawn-care sample:
-// deep green, warm off-white, one muted cedar accent, serif display (app/fonts.ts).
+/**
+ * T&M: the "Trade professional" direction from AGENT.md Phase 2b.
+ *
+ * Why this one. Spray foam is an installed building trade bought on competence,
+ * not on beauty, and the 69 client photographs are structure and texture rather
+ * than scenery: framing, purlins, roof decks and stud bays. A deep navy-slate
+ * grid holds those photographs without competing with them, and the cool base
+ * makes the warm cream of the foam read as the subject on every page.
+ *
+ * One departure from the direction as written, and it is deliberate. Trade
+ * professional normally gives visual emphasis to credentials, licensing and
+ * response time. T&M has supplied none of those, so there is nothing to
+ * emphasise and inventing a badge would be a lie. The weight goes to the work
+ * and the phone number instead.
+ *
+ * Accent is a single brick red, used only on the primary button, the mobile
+ * call bar and the eyebrow rule. Blue or red, never both, and well under 5%.
+ */
 const theme: Theme = {
   palette: {
-    primary: '#1E3D2C',
-    primaryDark: '#152B1F',
-    primarySoft: '#E9EFE8',
-    accent: '#A8623A',
-    accentDark: '#8B4E2C',
-    bg: '#F6F3EC',
-    surface: '#FDFBF7',
-    ink: '#1A1F1B',
-    muted: '#5C6660',
-    line: '#DCD8CE',
-    onPrimary: '#F6F3EC',
-    onAccent: '#F6F3EC',
+    primary: '#1B2A38',
+    primaryDark: '#121C26',
+    primarySoft: '#E7ECF1',
+    accent: '#B93A22',
+    accentDark: '#962D19',
+    bg: '#F4F2ED',
+    surface: '#FCFAF6',
+    ink: '#1A1E24',
+    muted: '#5B6572',
+    line: '#DCD8D0',
+    onPrimary: '#F4F2ED',
+    onAccent: '#F4F2ED',
   },
   heroVariant: 'full-bleed',
-  radius: 0.375,
-  shadow: '0 1px 2px rgb(20 30 24 / 0.08)',
+  radius: 0.25,
+  shadow: '0 1px 3px rgb(18 28 38 / 0.10)',
 }
 
 export default theme

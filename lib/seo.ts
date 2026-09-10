@@ -45,7 +45,8 @@ export function buildTitle(args: Pick<BuildMetadataArgs, 'kind' | 'service' | 'a
       return `${args.service.name} in ${primaryCity} | ${displayName}`
     case 'area':
       if (!args.area) throw new Error('buildTitle: kind "area" needs an area')
-      return `${primaryService.name} in ${args.area.name}, ${primaryState} | ${displayName}`
+      // Areas inside primaryState carry state: null and resolve to it, so they render unchanged.
+      return `${primaryService.name} in ${args.area.name}, ${args.area.state ?? primaryState} | ${displayName}`
     case 'services':
       return `All Services in ${primaryCity} | ${displayName}`
     case 'about':
@@ -74,7 +75,7 @@ export function defaultDescription(args: Pick<BuildMetadataArgs, 'kind' | 'servi
     case 'service':
       return `${args.service?.shortDescription ?? ''} Serving ${primaryCity}, ${primaryState}. Call ${displayName} at ${phoneDisplay} for a free quote.`
     case 'area':
-      return `${displayName} offers ${list} in ${args.area?.name ?? primaryCity}, ${primaryState}. Local crew, clear quotes, and reliable scheduling. Call ${phoneDisplay} to get started.`
+      return `${displayName} offers ${list} in ${args.area?.name ?? primaryCity}, ${args.area?.state ?? primaryState}. Local crew, clear quotes, and reliable scheduling. Call ${phoneDisplay} to get started.`
     case 'services':
       return `See every service ${displayName} offers in ${primaryCity}, ${primaryState}: ${list}. Each page explains what is included and answers common questions.`
     case 'about':

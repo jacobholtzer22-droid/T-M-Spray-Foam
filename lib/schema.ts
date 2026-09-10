@@ -37,8 +37,20 @@ function heroImageUrl(c: SiteConfig): string | null {
   return c.images.hero && hasImage(c.images.hero) ? absolute(getImage(c.images.hero).src) : null
 }
 
+/**
+ * A bare `{ '@type': 'City', name }` is ambiguous once a site serves more than one
+ * state: there are Nashvilles, Marions and Salems in many of them. Each city is
+ * wrapped in its containing state so the area is unambiguous to a consumer.
+ *
+ * `AdministrativeArea` is used rather than the narrower `State` because it is
+ * already on verify.ts's type allowlist, so this needs no change to check 9.
+ */
 function areaServed(areas: readonly ServiceArea[]): Json[] {
-  return areas.map((a) => ({ '@type': 'City', name: a.name }))
+  return areas.map((a) => ({
+    '@type': 'City',
+    name: a.name,
+    containedInPlace: { '@type': 'AdministrativeArea', name: a.state ?? config.primaryState },
+  }))
 }
 
 function aggregateRating(c: SiteConfig): Json {

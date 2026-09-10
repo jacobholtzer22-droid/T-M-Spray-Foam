@@ -3,135 +3,180 @@ import type { SiteConfigInput } from './lib/config-schema'
 /**
  * Every business fact for this site lives here and nowhere else.
  *
- * This shipped copy describes "Sample Lawn Care", a fictional business, so the
- * template builds and renders out of the box. It is a sample identity, not a
- * placeholder to edit around: scripts/verify.ts check 2 refuses to pass while
- * the slug, names, or domain still carry the sample identity, and check 3
- * confirms the slug exists on the platform. Replace every value from BRIEF.md.
+ * Filled from BRIEF.md on 2026-09-10. Two sources only: a Facebook page
+ * screenshot and a second directory listing, both pasted into the build
+ * session, plus answers typed by Jacob. Provenance for every field is in
+ * BRIEF.md under "Provenance".
  *
  * Unknown facts are null. A null field renders nothing. A guessed value is a defect.
+ *
+ * READ BEFORE EDITING THE SERVICES:
+ * No source describes what any of the four services includes. Every
+ * shortDescription and every FAQ answer below is built from exactly three
+ * facts: the service name, the service area, and how to make contact. There is
+ * no claim about materials, buildings, R-value, lead time, warranty or price
+ * anywhere on this site, because nothing states one. Replace this copy with the
+ * owner's own words as soon as they exist.
  */
 const siteConfig = {
-  businessSlug: 'sample-lawn-care',
+  businessSlug: 't-m-construction',
 
-  legalName: 'Sample Lawn Care LLC',
-  displayName: 'Sample Lawn Care',
-  tagline: 'Reliable lawn care for homes across the Springfield area.',
+  legalName: 'T&M Construction Co',
+  // Shortened from the Facebook name "T&M Construction & Spray Foam Insulation".
+  // The full 39-character string overran verify.ts check 13 (titles cap at 60)
+  // on every page of the site. See BRIEF.md for the arithmetic.
+  displayName: 'T&M Spray Foam',
+  tagline: 'Above and beyond for every customer, with products and service that cut your utility costs.',
 
   schemaType: 'HomeAndConstructionBusiness',
 
-  phone: '+15555550123',
-  email: 'hello@sample-lawn-care.com',
+  phone: '+16186949154',
+  email: 'terrellkempfer@gmail.com',
 
-  address: {
-    street: '100 Sample Street',
-    city: 'Springfield',
-    state: 'IL',
-    zip: '62701',
-    lat: null,
-    lng: null,
-  },
+  // Facebook publishes a city, state and ZIP but no street line, so no address
+  // is published and the address block and address schema do not render.
+  address: null,
 
-  primaryCity: 'Springfield',
+  primaryCity: 'Mount Vernon',
   primaryState: 'IL',
 
+  // Radius and the two endpoints are the owner's. The individual towns are
+  // Jacob's selection along those corridors. Confirm with the owner before launch.
+  // `state` is set only where the town is outside primaryState.
   serviceAreas: [
-    { slug: 'springfield', name: 'Springfield', county: 'Sangamon County' },
-    { slug: 'chatham', name: 'Chatham', county: 'Sangamon County' },
-    { slug: 'rochester', name: 'Rochester', county: 'Sangamon County' },
-    { slug: 'sherman', name: 'Sherman', county: 'Sangamon County' },
+    { slug: 'mount-vernon', name: 'Mount Vernon', county: 'Jefferson County' },
+    { slug: 'salem', name: 'Salem', county: 'Marion County' },
+    { slug: 'centralia', name: 'Centralia', county: 'Marion County' },
+    { slug: 'benton', name: 'Benton', county: 'Franklin County' },
+    { slug: 'west-frankfort', name: 'West Frankfort', county: 'Franklin County' },
+    { slug: 'marion', name: 'Marion', county: 'Williamson County' },
+    { slug: 'carbondale', name: 'Carbondale', county: 'Jackson County' },
+    { slug: 'nashville', name: 'Nashville', county: 'Washington County' },
+    { slug: 'carlyle', name: 'Carlyle', county: 'Clinton County' },
+    { slug: 'breese', name: 'Breese', county: 'Clinton County' },
+    { slug: 'belleville', name: 'Belleville', county: 'St. Clair County' },
+    { slug: 'o-fallon', name: "O'Fallon", county: 'St. Clair County' },
+    { slug: 'mcleansboro', name: 'McLeansboro', county: 'Hamilton County' },
+    { slug: 'fairfield', name: 'Fairfield', county: 'Wayne County' },
+    { slug: 'carmi', name: 'Carmi', county: 'White County' },
+    { slug: 'mount-carmel', name: 'Mount Carmel', county: 'Wabash County' },
+    { slug: 'evansville', name: 'Evansville', county: 'Vanderburgh County', state: 'IN' },
+    { slug: 'st-louis', name: 'St. Louis', county: 'St. Louis City', state: 'MO' },
   ],
 
   services: [
     {
-      slug: 'lawn-mowing',
-      name: 'Lawn Mowing',
+      slug: 'spray-foam-insulation',
+      name: 'Spray Foam Insulation',
       shortDescription:
-        'Weekly and biweekly mowing with edging, trimming, and cleanup on every visit, scheduled on the same day each week.',
-      priceFrom: 45,
-      priceNote: 'per visit for a typical quarter-acre lot; larger lots quoted on site',
-      image: 'sample-mowing.jpg',
+        'Spray foam insulation installed anywhere in the service area, which reaches St. Louis, Missouri and Evansville, Indiana. Call for a quote.',
+      priceFrom: null,
+      priceNote: null,
+      image: 'IMG_6416.jpeg',
       faqs: [
         {
-          q: 'How often should my lawn be mowed?',
-          a: 'Most lawns in central Illinois do best on a weekly schedule from May through September, then every other week as growth slows in spring and fall. We set the schedule with you and adjust it when the weather changes.',
+          q: 'Do you install spray foam insulation?',
+          a: 'Yes, it is one of the services we offer. Call or send the contact form on this site and we will talk through your building.',
         },
         {
-          q: 'Do you bag the clippings or mulch them?',
-          a: 'We mulch clippings back into the lawn by default because it returns nutrients to the soil. If you prefer bagging, or the grass has gotten long between visits, we bag and haul the clippings away.',
+          q: 'Which areas do you cover?',
+          a: 'We are based in Mount Vernon, Illinois and work across southern Illinois, plus Evansville, Indiana and St. Louis, Missouri. Call to confirm your location.',
         },
         {
-          q: 'What is included in a mowing visit?',
-          a: 'Every visit includes mowing, string trimming around obstacles, edging along walks and drives, and blowing clippings off hard surfaces. Nothing is left on your patio or driveway.',
+          q: 'How do I get a price for my building?',
+          a: 'We do not publish a starting price. Every building is quoted directly, so call or send the contact form and we will get you a number.',
         },
       ],
     },
     {
-      slug: 'mulch-installation',
-      name: 'Mulch Installation',
+      slug: 'injection-insulation',
+      name: 'Injection Insulation',
       shortDescription:
-        'Bed edging, weed removal, and fresh hardwood or dyed mulch installed at the right depth so beds stay tidy all season.',
+        'Injection insulation installed anywhere in the service area across southern Illinois. Call or send the contact form and we will quote the job.',
       priceFrom: null,
-      priceNote: 'quoted by the yard after we measure your beds',
-      image: 'sample-mulch.jpg',
+      priceNote: null,
+      image: null,
       faqs: [
         {
-          q: 'How deep should mulch be installed?',
-          a: 'We install mulch two to three inches deep. Less than that lets weeds through and dries out fast; more than that can smother roots and hold too much moisture against plant stems.',
+          q: 'Do you install injection insulation?',
+          a: 'Yes, it is one of the services we offer. Call or send the contact form and we will go over what your building needs.',
         },
         {
-          q: 'Do you remove the old mulch first?',
-          a: 'Usually not. Old mulch breaks down into the soil, so we pull weeds, redefine the bed edge, and top-dress with new mulch. If the old layer is already too deep, we remove some before installing.',
+          q: 'What areas do you serve?',
+          a: 'We work out of Mount Vernon, Illinois and cover southern Illinois along with Evansville, Indiana and St. Louis, Missouri. Ask us about your town.',
         },
         {
-          q: 'What kind of mulch do you offer?',
-          a: 'We install natural hardwood mulch and dyed mulch in brown, black, or red. We will talk through which holds its color longest and which suits the plants in your beds before we order.',
+          q: 'How is injection insulation priced?',
+          a: 'There is no published starting price. Pricing depends on the job, so call or use the contact form and we will quote it for you.',
         },
       ],
     },
     {
-      slug: 'seasonal-cleanup',
-      name: 'Seasonal Cleanup',
+      slug: 'batt-and-roll-insulation',
+      name: 'Batt & Roll Insulation',
       shortDescription:
-        'Spring and fall cleanups that clear leaves, cut back perennials, and get beds and lawns ready for the season ahead.',
+        'Batt, rolled and reflective insulation installed or upgraded anywhere in the service area. Call or send the contact form and we will quote the job.',
       priceFrom: null,
-      priceNote: 'quoted after a quick walk of the property',
-      image: 'sample-cleanup.jpg',
+      priceNote: null,
+      image: null,
       faqs: [
         {
-          q: 'When should I schedule a fall cleanup?',
-          a: 'Once most of the leaves have dropped, which in the Springfield area is usually mid to late November. We can also do a first pass earlier in fall and a final pass after the trees are bare.',
+          q: 'Do you install batt, rolled or reflective insulation?',
+          a: 'Yes. Batt, rolled and reflective insulation are all part of this service. Call or send the contact form and we will talk it through.',
         },
         {
-          q: 'What does a spring cleanup include?',
-          a: 'We remove leaves and debris left from winter, cut back perennials and ornamental grasses, redefine bed edges, and haul everything away so the lawn and beds are ready for the growing season.',
+          q: 'Can you upgrade insulation that is already in place?',
+          a: 'Upgrades are part of this service as well as new installs. Call or send the contact form and we will take a look at what you have.',
         },
         {
-          q: 'Do you haul away the debris?',
-          a: 'Yes. Everything we clear is loaded and hauled off the property the same day. You are not left with bags at the curb.',
+          q: 'Which towns do you work in?',
+          a: 'Mount Vernon, Illinois is our base and we cover southern Illinois plus Evansville, Indiana and St. Louis, Missouri. Get in touch to check yours.',
+        },
+      ],
+    },
+    {
+      slug: 'soundproofing',
+      name: 'Soundproofing Service',
+      shortDescription:
+        'Soundproofing work anywhere in the service area across southern Illinois. Call or send the contact form and we will come and quote the room.',
+      priceFrom: null,
+      priceNote: null,
+      image: null,
+      faqs: [
+        {
+          q: 'Do you do soundproofing work?',
+          a: 'Yes, soundproofing is one of the services we offer. Call or send the contact form and we will talk about the room you have in mind.',
+        },
+        {
+          q: 'How much does soundproofing cost?',
+          a: 'No starting price is published. Every room is different, so we quote after we understand the job. Call or send the contact form.',
+        },
+        {
+          q: 'Where do you take soundproofing jobs?',
+          a: 'We are based in Mount Vernon, Illinois and travel across southern Illinois plus Evansville, Indiana and St. Louis, Missouri.',
         },
       ],
     },
   ],
 
-  hours: [
-    { day: 'Monday', open: '08:00', close: '17:00' },
-    { day: 'Tuesday', open: '08:00', close: '17:00' },
-    { day: 'Wednesday', open: '08:00', close: '17:00' },
-    { day: 'Thursday', open: '08:00', close: '17:00' },
-    { day: 'Friday', open: '08:00', close: '17:00' },
-    { day: 'Saturday', open: '08:00', close: '12:00' },
-  ],
+  // No source states opening hours. Facebook showed only "Closed now", which is
+  // a moment in time, not a schedule. No hours block, no openingHoursSpecification.
+  hours: null,
 
-  yearsInBusiness: 12,
+  yearsInBusiness: null,
   licenseNumber: null,
-  insured: true,
+  insured: null,
 
+  // Facebook says "Not yet rated (0 reviews)". The second listing shows an
+  // aggregate of 4.9 from 8, with no author and no review text anywhere, so no
+  // row can be built. Empty by design. Do not populate from an aggregate score.
   reviews: [],
 
+  // The Facebook page's contents were pasted, its URL was not, and a page URL
+  // cannot be derived from a page name. No profile links render.
   profiles: {
     gbp: null,
-    facebook: 'https://www.facebook.com/samplelawncare',
+    facebook: null,
     instagram: null,
     yelp: null,
   },
@@ -139,25 +184,41 @@ const siteConfig = {
   faqs: [
     {
       q: 'Which areas do you serve?',
-      a: 'We serve Springfield and the surrounding communities of Chatham, Rochester, and Sherman. If you are just outside those areas, ask and we will let you know if we can fit you in.',
+      a: 'We are based in Mount Vernon, Illinois and cover southern Illinois, running west to St. Louis, Missouri and east to Evansville, Indiana.',
+    },
+    {
+      q: 'What insulation work do you do?',
+      a: 'Spray foam insulation, injection insulation, batt and roll insulation, and soundproofing. Each one has its own page with more detail.',
     },
     {
       q: 'How do I get a quote?',
-      a: 'Call us or send the contact form on this site. For mowing we can often quote from the property size; for mulch and cleanups we stop by to measure and walk the property first.',
+      a: 'Call the number at the top of this page or send the contact form. We will get back to you to talk through your building.',
     },
     {
-      q: 'Are you insured?',
-      a: 'Yes. We carry liability insurance and are happy to provide a certificate on request before work begins.',
+      q: 'Do you work outside Illinois?',
+      a: 'Yes. The area reaches St. Louis, Missouri to the west and Evansville, Indiana to the east, both around an hour and a quarter from Mount Vernon.',
     },
   ],
 
   images: {
-    hero: 'sample-hero.jpg',
-    about: 'sample-crew.jpg',
-    gallery: ['sample-mowing.jpg', 'sample-mulch.jpg', 'sample-cleanup.jpg', 'sample-crew.jpg'],
+    hero: 'IMG_6103.jpg',
+    about: 'IMG_5700.jpg',
+    gallery: [
+      'IMG_5693.jpg',
+      'IMG_5724.jpg',
+      'IMG_6415.jpeg',
+      'IMG_6352.jpeg',
+      'IMG_6100.jpg',
+      'IMG_8776.jpg',
+      'IMG_6591.jpeg',
+      'IMG_5723.jpg',
+    ],
   },
 
-  domain: 'https://www.sample-lawn-care.com',
+  // From the Facebook Links row, which shows the bare host. Scheme assumed
+  // https because the schema requires it. Whether www or the apex is primary
+  // is NOT confirmed. Verify before pointing DNS at this build.
+  domain: 'https://tandmconstructionandsprayfoam.com',
 } satisfies SiteConfigInput
 
 export default siteConfig
