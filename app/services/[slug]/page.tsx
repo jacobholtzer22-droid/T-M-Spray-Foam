@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import CtaBand from '@/components/CtaBand'
+import Gallery, { galleryWindow } from '@/components/Gallery'
 import FaqAccordion from '@/components/FaqAccordion'
 import Img from '@/components/Img'
 import JsonLd from '@/components/JsonLd'
@@ -90,6 +91,7 @@ export default async function ServicePage({ params }: { params: { slug: string }
       </div>
 
       <FaqAccordion faqs={service.faqs} heading={`${service.name} Questions`} />
+      <Gallery heading="Recent Work" images={galleryWindow(service.slug, 6)} />
       <ServiceGrid heading="Other Services" exclude={service.slug} />
       <CtaBand heading={`Need ${service.name.toLowerCase()} in ${config.primaryCity}?`} />
     </>

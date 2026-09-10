@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Credentials from '@/components/Credentials'
 import CtaBand from '@/components/CtaBand'
+import Gallery, { galleryWindow } from '@/components/Gallery'
 import Img from '@/components/Img'
 import JsonLd from '@/components/JsonLd'
 import PageHeader from '@/components/PageHeader'
@@ -39,6 +40,7 @@ export default async function AboutPage() {
           </aside>
         )}
       </div>
+      <Gallery heading="Recent Work" images={galleryWindow('about', 6)} />
       <CtaBand />
     </>
   )

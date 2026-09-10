@@ -35,7 +35,7 @@ export default async function HomePage() {
       </div>
       <article className="mx-auto max-w-3xl px-4 pt-6 sm:px-6">{content}</article>
       <ServiceGrid />
-      <Gallery />
+      <Gallery images={config.images.gallery.slice(0, 9)} />
       <Reviews />
       <AreaList />
       <FaqAccordion faqs={config.faqs} />

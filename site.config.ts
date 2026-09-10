@@ -157,6 +157,82 @@ const siteConfig = {
         },
       ],
     },
+    // Added 2026-09-10 from CLIENT: "he does house construction, kitchen
+    // remodeling, demolition and stuff like that". Three names, no description
+    // of any of them, and "stuff like that" is not a service list, so nothing
+    // beyond these three is built. Same fallback copy rule as the four above.
+    // NOTE: there is not a single photograph of construction, remodelling or
+    // demolition work in the 69 supplied. All of them are insulation jobs.
+    // These three pages therefore carry no service image.
+    {
+      slug: 'house-construction',
+      name: 'House Construction',
+      shortDescription:
+        'House construction taken on across the service area, which runs from Mount Vernon out to St. Louis and Evansville. Call to talk through your build.',
+      priceFrom: null,
+      priceNote: null,
+      image: null,
+      faqs: [
+        {
+          q: 'Do you take on house construction?',
+          a: 'Yes, house construction is one of the things we do. Call or send the contact form and we will talk through what you have in mind.',
+        },
+        {
+          q: 'What areas do you build in?',
+          a: 'We work out of Mount Vernon, Illinois and cover southern Illinois along with Evansville, Indiana and St. Louis, Missouri. Ask us about your site.',
+        },
+        {
+          q: 'How is a build priced?',
+          a: 'No starting price is published. Every build is different, so we quote it directly. Call or send the contact form to get that started.',
+        },
+      ],
+    },
+    {
+      slug: 'kitchen-remodeling',
+      name: 'Kitchen Remodeling',
+      shortDescription:
+        'Kitchen remodeling anywhere in the service area across southern Illinois. Call or send the contact form and we will come and look at the room.',
+      priceFrom: null,
+      priceNote: null,
+      image: null,
+      faqs: [
+        {
+          q: 'Do you remodel kitchens?',
+          a: 'Yes, kitchen remodeling is one of the things we do. Call or send the contact form and we will talk about the room you have in mind.',
+        },
+        {
+          q: 'How much does a kitchen remodel cost?',
+          a: 'No starting price is published. Every kitchen is different, so we quote after we have seen it. Call or send the contact form.',
+        },
+        {
+          q: 'Which towns do you remodel in?',
+          a: 'Mount Vernon, Illinois is our base and we cover southern Illinois plus Evansville, Indiana and St. Louis, Missouri. Get in touch to check yours.',
+        },
+      ],
+    },
+    {
+      slug: 'demolition',
+      name: 'Demolition',
+      shortDescription:
+        'Demolition work anywhere in the service area, which reaches St. Louis, Missouri and Evansville, Indiana. Call or send the contact form for a quote.',
+      priceFrom: null,
+      priceNote: null,
+      image: null,
+      faqs: [
+        {
+          q: 'Do you do demolition work?',
+          a: 'Yes, demolition is one of the things we do. Call or send the contact form and tell us what needs taking out.',
+        },
+        {
+          q: 'What areas do you cover for demolition?',
+          a: 'We are based in Mount Vernon, Illinois and travel across southern Illinois plus Evansville, Indiana and St. Louis, Missouri.',
+        },
+        {
+          q: 'How do I get a demolition quote?',
+          a: 'Call or send the contact form with the address and what needs to come out. Nothing is priced from a rate card, so we quote the job itself.',
+        },
+      ],
+    },
   ],
 
   // No source states opening hours. Facebook showed only "Closed now", which is
@@ -187,8 +263,8 @@ const siteConfig = {
       a: 'We are based in Mount Vernon, Illinois and cover southern Illinois, running west to St. Louis, Missouri and east to Evansville, Indiana.',
     },
     {
-      q: 'What insulation work do you do?',
-      a: 'Spray foam insulation, injection insulation, batt and roll insulation, and soundproofing. Each one has its own page with more detail.',
+      q: 'What kind of work do you do?',
+      a: 'Insulation, soundproofing, house construction, kitchen remodeling and demolition. Each service has its own page with more detail.',
     },
     {
       q: 'How do I get a quote?',
@@ -200,18 +276,29 @@ const siteConfig = {
     },
   ],
 
+  /**
+   * gallery is the curated pool for the whole site, not just the homepage.
+   * The homepage shows the first nine; service and area pages each show a
+   * rotating window of six so a visitor moving between towns does not see the
+   * same six photographs every time. Ordered best first.
+   *
+   * Excluded from the 69 supplied: the motion-blurred frames (6592, 6593,
+   * 6778, 6779, 7960), the blown-out one (6780) and the dim one (6223).
+   */
   images: {
     hero: 'IMG_6103.jpg',
     about: 'IMG_5700.jpg',
     gallery: [
-      'IMG_5693.jpg',
-      'IMG_5724.jpg',
-      'IMG_6415.jpeg',
-      'IMG_6352.jpeg',
-      'IMG_6100.jpg',
-      'IMG_8776.jpg',
-      'IMG_6591.jpeg',
-      'IMG_5723.jpg',
+      'IMG_5693.jpg', 'IMG_5724.jpg', 'IMG_6415.jpeg', 'IMG_6352.jpeg', 'IMG_6100.jpg',
+      'IMG_8776.jpg', 'IMG_6591.jpeg', 'IMG_5723.jpg', 'IMG_5697.jpg', 'IMG_6120.jpg',
+      'IMG_5824.jpg', 'IMG_6222.jpg', 'IMG_8775.jpg', 'IMG_6416.jpeg', 'IMG_5719.jpg',
+      'IMG_6101.jpg', 'IMG_6355.jpeg', 'IMG_8716.jpg', 'IMG_5698.jpg', 'IMG_6245.jpeg',
+      'IMG_5722.jpg', 'IMG_6351.jpeg', 'IMG_8714.jpg', 'IMG_6102.jpg', 'IMG_5696.jpg',
+      'IMG_6251.jpeg', 'IMG_5817.jpg', 'IMG_6219.jpg',
+      'IMG_8717.jpg', 'IMG_6350.jpeg', 'IMG_5721.jpg', 'IMG_6250.jpeg', 'IMG_5699.jpg',
+      'IMG_6227.jpeg', 'IMG_8711.jpg', 'IMG_6249.jpeg', 'IMG_5822.jpg', 'IMG_6122.jpg',
+      'IMG_8773.jpg', 'IMG_6248.jpeg', 'IMG_5823.jpg', 'IMG_6252.jpeg', 'IMG_5720.jpg',
+      'IMG_6226.jpeg', 'IMG_7958.jpeg', 'IMG_5827.jpg', 'IMG_6594.jpeg', 'IMG_5818.jpg',
     ],
   },
 

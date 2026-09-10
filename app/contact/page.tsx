@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import ContactDetails from '@/components/ContactDetails'
 import ContactForm from '@/components/ContactForm'
+import Gallery, { galleryWindow } from '@/components/Gallery'
 import JsonLd from '@/components/JsonLd'
 import PageHeader from '@/components/PageHeader'
 import { config } from '@/lib/config'
@@ -34,6 +35,7 @@ export default async function ContactPage() {
           <ContactDetails />
         </aside>
       </div>
+      <Gallery heading="Recent Work" images={galleryWindow('contact', 6)} />
     </>
   )
 }

@@ -76,6 +76,16 @@ Note on question 2: answerable only because the service name itself contains the
 - Price note: **UNKNOWN**
 - Customer questions: 1. Do you do soundproofing? 2. What areas do you cover? 3. How do I get a price for my job?
 
+### Services 5 to 7, added 2026-09-10
+
+CLIENT, typed in session: "He does house construction kitchen remodeling dmeolition and stuff like that."
+
+- **House Construction**, **Kitchen Remodeling**, **Demolition** are now built. Provenance is that one line and nothing else.
+- **"and stuff like that" is not a service list.** Nothing beyond those three names was added. If there are more, they need naming.
+- No description exists for any of the three, so they carry the same fallback copy rule as the first four: name, service area, contact, nothing else.
+- **There is not one photograph of construction, remodelling or demolition work in the 69 supplied.** Every frame is an insulation job. The three new pages carry the site-wide "Recent Work" band, which is honestly labelled as the company's work, but a visitor on the Kitchen Remodeling page currently sees six pictures of sprayed foam. Photos of those trades are the fix.
+- This makes the shipped `displayName` "T&M Spray Foam" too narrow. See the naming note below.
+
 ### Candidate services NOT built
 
 - **Construction / general contracting** — "Construction Co" is in the legal name and "Construction" is in both the FB and PROFILE business names. Neither source lists it as a service or describes any construction work. Not built.

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import AreaList from '@/components/AreaList'
 import CtaBand from '@/components/CtaBand'
+import Gallery, { galleryWindow } from '@/components/Gallery'
 import JsonLd from '@/components/JsonLd'
 import PageHeader from '@/components/PageHeader'
 import ServiceGrid from '@/components/ServiceGrid'
@@ -48,6 +49,7 @@ export default async function AreaPage({ params }: { params: { slug: string } })
         crumbs={crumbs}
       />
       <article className="mx-auto max-w-3xl px-4 pt-6 sm:px-6">{content}</article>
+      <Gallery heading="Recent Work" images={galleryWindow(area.slug, 6)} />
       <ServiceGrid heading={`Services in ${area.name}`} />
       <AreaList heading="Nearby Areas" exclude={area.slug} />
       <CtaBand heading={`Get a quote in ${area.name}`} />

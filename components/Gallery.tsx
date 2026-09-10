@@ -5,8 +5,21 @@ import Img from './Img'
  * config.images.gallery on a full-dark section: the homepage's guaranteed
  * change of visual treatment. Nothing renders when the list is empty.
  */
-export default function Gallery({ heading = 'Recent Work' }: { heading?: string }) {
-  const images = config.images.gallery
+/**
+ * Deterministic window into config.images.gallery, so every page can show the
+ * client's own photographs without the whole site repeating the same six.
+ * Same seed always returns the same photos, which keeps the static build stable.
+ */
+export function galleryWindow(seed: string, count: number): string[] {
+  const pool = config.images.gallery
+  if (pool.length === 0) return []
+  let h = 0
+  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0
+  const start = h % pool.length
+  return Array.from({ length: Math.min(count, pool.length) }, (_, i) => pool[(start + i) % pool.length] as string)
+}
+
+export default function Gallery({ heading = 'Recent Work', images = config.images.gallery }: { heading?: string; images?: readonly string[] }) {
   if (images.length === 0) return null
   return (
     <section className="bg-primary-dark text-on-primary">

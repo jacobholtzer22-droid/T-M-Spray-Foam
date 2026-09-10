@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import CtaBand from '@/components/CtaBand'
+import Gallery, { galleryWindow } from '@/components/Gallery'
 import JsonLd from '@/components/JsonLd'
 import PageHeader from '@/components/PageHeader'
 import ServiceGrid from '@/components/ServiceGrid'
@@ -27,6 +28,7 @@ export default async function ServicesIndexPage() {
       <PageHeader title={`Services in ${config.primaryCity}, ${config.primaryState}`} crumbs={CRUMBS} />
       <article className="mx-auto max-w-3xl px-4 pt-6 sm:px-6">{content}</article>
       <ServiceGrid heading="Everything We Offer" />
+      <Gallery heading="Recent Work" images={galleryWindow('services-index', 6)} />
       <CtaBand />
     </>
   )
