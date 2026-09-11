@@ -172,6 +172,9 @@ const siteConfig = {
       priceFrom: null,
       priceNote: null,
       image: null,
+      // Framing and shell photographs. The 69 supplied contain no construction
+      // job, so these are the most honestly non-specific frames available.
+      galleryImages: ['IMG_7958.jpeg', 'IMG_7959.jpeg', 'IMG_6122.jpg', 'IMG_5713.jpg', 'IMG_6120.jpg', 'IMG_5714.jpg'],
       faqs: [
         {
           q: 'Do you take on house construction?',
@@ -195,6 +198,9 @@ const siteConfig = {
       priceFrom: null,
       priceNote: null,
       image: null,
+      // There is no photograph of a kitchen in the set. These are the framing,
+      // drywall and in-progress interior frames, which at least do not show foam.
+      galleryImages: ['IMG_6417.jpeg', 'IMG_5822.jpg', 'IMG_6350.jpeg', 'IMG_5829.jpg', 'IMG_5714.jpg', 'IMG_6123.jpg'],
       faqs: [
         {
           q: 'Do you remodel kitchens?',
@@ -218,6 +224,9 @@ const siteConfig = {
       priceFrom: null,
       priceNote: null,
       image: null,
+      // No demolition photograph exists in the set. Bare framing and stripped
+      // interiors are the closest honest stand-in until he sends real ones.
+      galleryImages: ['IMG_5713.jpg', 'IMG_6124.jpg', 'IMG_7959.jpeg', 'IMG_6417.jpeg', 'IMG_5714.jpg', 'IMG_6122.jpg'],
       faqs: [
         {
           q: 'Do you do demolition work?',

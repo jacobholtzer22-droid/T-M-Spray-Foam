@@ -91,7 +91,7 @@ export default async function ServicePage({ params }: { params: { slug: string }
       </div>
 
       <FaqAccordion faqs={service.faqs} heading={`${service.name} Questions`} />
-      <Gallery heading="Recent Work" images={galleryWindow(service.slug, 6)} />
+      <Gallery heading="Recent Work" images={service.galleryImages.length ? service.galleryImages : galleryWindow(service.slug, 6)} />
       <ServiceGrid heading="Other Services" exclude={service.slug} />
       <CtaBand heading={`Need ${service.name.toLowerCase()} in ${config.primaryCity}?`} />
     </>

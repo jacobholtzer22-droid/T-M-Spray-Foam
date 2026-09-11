@@ -83,7 +83,8 @@ CLIENT, typed in session: "He does house construction kitchen remodeling dmeolit
 - **House Construction**, **Kitchen Remodeling**, **Demolition** are now built. Provenance is that one line and nothing else.
 - **"and stuff like that" is not a service list.** Nothing beyond those three names was added. If there are more, they need naming.
 - No description exists for any of the three, so they carry the same fallback copy rule as the first four: name, service area, contact, nothing else.
-- **There is not one photograph of construction, remodelling or demolition work in the 69 supplied.** Every frame is an insulation job. The three new pages carry the site-wide "Recent Work" band, which is honestly labelled as the company's work, but a visitor on the Kitchen Remodeling page currently sees six pictures of sprayed foam. Photos of those trades are the fix.
+- **There is not one photograph of construction, remodelling or demolition work in the 69 supplied.** Every frame is an insulation job. Resolved 2026-09-10 on CLIENT instruction ("just have more general photos for some of them"): those three pages now draw from a hand-picked set of the most non-specific frames, bare framing, drywall, stripped interiors and in-progress shots, rather than sprayed foam. No photograph claims to show construction, a kitchen or a demolition, because none does. Real photographs of those trades are still the proper fix.
+- **A full gallery at `/gallery`** holds all 69 photographs, added 2026-09-10 on CLIENT instruction. Nothing is excluded, so the blurred and dark frames that are kept out of the on-page bands still appear there.
 - This makes the shipped `displayName` "T&M Spray Foam" too narrow. See the naming note below.
 
 ### Candidate services NOT built

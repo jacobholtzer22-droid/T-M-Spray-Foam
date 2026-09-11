@@ -124,6 +124,16 @@ export const siteConfigSchema = z
           priceNote: z.string().nullable(),
           /** Filename in public/images/originals to use as the page image, or null. */
           image: z.string().nullable(),
+          /**
+           * Photographs for this service page's work band. Leave empty and the
+           * page takes a rotating window of the main gallery pool.
+           *
+           * Set it when the main pool would misrepresent the service. A
+           * contractor whose photographs are all one trade should not illustrate
+           * the others with them; pick the frames that are honestly non-specific
+           * instead, or supply none until real photographs of that trade exist.
+           */
+          galleryImages: z.array(z.string()).default([]),
           faqs: z.array(faq).min(3).max(6),
         }),
       )
