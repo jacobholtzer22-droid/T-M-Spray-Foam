@@ -18,9 +18,10 @@
  * - The honeypot uses a nonsense field name inside a `hidden` wrapper. Chrome
  *   autofills off-screen inputs and anything named "company", which silently
  *   killed real leads before, so neither technique is used.
- * - Success messaging is a generic thank-you regardless of status. The endpoint
- *   returns 200 even when a downstream write fails, so no claim beyond
- *   "we received it" is honest.
+ * - The thank-you shows only when the response is ok and the body does not
+ *   report success: false. A 400, 404 or 500 shows the error state. Even a
+ *   200 can follow a failed downstream write, so the copy still claims no
+ *   more than "we received it".
  */
 
 import { useState, type FormEvent } from 'react'
@@ -55,7 +56,7 @@ export default function ContactForm() {
 
     setStatus('sending')
     try {
-      await fetch(CONTACT_ENDPOINT, {
+      const res = await fetch(CONTACT_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -68,6 +69,15 @@ export default function ContactForm() {
           [HONEYPOT_FIELD]: honeypot,
         }),
       })
+      // A non-JSON body (an HTML error page from the host, say) must not throw
+      // past this point, so parse failures resolve to null.
+      const result: unknown = await res.json().catch(() => null)
+      const reportedFailure =
+        typeof result === 'object' && result !== null && (result as { success?: unknown }).success === false
+      if (!res.ok || reportedFailure) {
+        setStatus('error')
+        return
+      }
       setStatus('done')
     } catch {
       setStatus('error')
