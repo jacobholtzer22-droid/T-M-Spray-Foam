@@ -25,6 +25,7 @@
  */
 
 import { useState, type FormEvent } from 'react'
+import { trackQuoteFormConversion } from '@/lib/ads'
 import { config, CONTACT_ENDPOINT, HONEYPOT_FIELD } from '@/lib/config'
 
 type Status = 'idle' | 'sending' | 'done' | 'error'
@@ -78,6 +79,7 @@ export default function ContactForm() {
         setStatus('error')
         return
       }
+      trackQuoteFormConversion()
       setStatus('done')
     } catch {
       setStatus('error')

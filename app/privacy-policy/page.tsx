@@ -62,8 +62,9 @@ export default async function PrivacyPolicyPage() {
 
         <h2 className="mt-10 font-heading text-2xl font-bold text-primary-dark">Cookies and analytics</h2>
         <p className="mt-4">
-          This site does not set tracking cookies of its own. If analytics or advertising tags are added in the future, this
-          policy will be updated to describe them.
+          This site uses Google Ads conversion tracking. When you visit, Google may set cookies that record whether you
+          arrived from one of our ads and whether you then sent the contact form or tapped a phone number to call us. We use
+          this only to measure how our advertising performs. Google handles that data under its own privacy policy.
         </p>
 
         <h2 className="mt-10 font-heading text-2xl font-bold text-primary-dark">Your choices</h2>

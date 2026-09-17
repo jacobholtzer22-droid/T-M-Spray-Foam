@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import type { CSSProperties, ReactNode } from 'react'
+import CallConversionTracker from '@/components/CallConversionTracker'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import MobileCallBar from '@/components/MobileCallBar'
+import { GOOGLE_ADS_TAG_ID } from '@/lib/ads'
 import { config } from '@/lib/config'
 import { buildTitle, renderTitle, TITLE_TEMPLATE } from '@/lib/seo'
 import theme from '@/theme'
@@ -52,6 +55,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </main>
         <Footer />
         <MobileCallBar />
+        <CallConversionTracker />
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_TAG_ID}`} strategy="afterInteractive" />
+        <Script id="google-ads-gtag" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GOOGLE_ADS_TAG_ID}');`}
+        </Script>
       </body>
     </html>
   )
