@@ -1,0 +1,1 @@
+Set the `domain` field in site.config.ts to https://www.tandmconstructionandsprayfoam.com (the www host Vercel serves), so the canonical URL, sitemap and robots all point at that host. Change nothing else: no copy, layout, image or other config changes.
