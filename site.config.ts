@@ -311,10 +311,8 @@ const siteConfig = {
     ],
   },
 
-  // From the Facebook Links row, which shows the bare host. Scheme assumed
-  // https because the schema requires it. Whether www or the apex is primary
-  // is NOT confirmed. Verify before pointing DNS at this build.
-  domain: 'https://tandmconstructionandsprayfoam.com',
+  // The www host Vercel serves, per the site_update instructions of 2026-11-11.
+  domain: 'https://www.tandmconstructionandsprayfoam.com',
 } satisfies SiteConfigInput
 
 export default siteConfig
