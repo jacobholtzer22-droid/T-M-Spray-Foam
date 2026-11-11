@@ -1,1 +1,10 @@
-Set the `domain` field in site.config.ts to https://www.tandmconstructionandsprayfoam.com (the www host Vercel serves), so the canonical URL, sitemap and robots all point at that host. Change nothing else: no copy, layout, image or other config changes.
+Tracking install. Write this tracking block into site.config.ts as the `tracking` key, exactly as given, and change nothing else (AGENT.md, CI mode, Tracking installs):
+
+```ts
+tracking: {
+  googleAdsId: 'AW-18443721661',
+  conversions: { form: 'AW-18443721661/WnkHCLT11vMcEL2309pE', call: 'AW-18443721661/aw2qCLr11vMcEL2309pE' },
+},
+```
+
+Then run the gate: check 22 must pass.
