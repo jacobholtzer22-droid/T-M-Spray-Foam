@@ -1,21 +1,19 @@
-# BUILD-REPORT: t-m-construction (site_update, tracking install)
+# BUILD-REPORT: t-m-construction (site_update, tracking install with template sync)
 
-**Result: STOPPED. Not applied. `site.config.ts` is unchanged.**
+**Result: STOPPED. Not applied. No source file changed.** `site.config.ts`, `lib/config-schema.ts`, `scripts/verify.ts`, `app/layout.tsx` and `components/` are byte-identical to the checked-out base.
 
-Instruction: write a `tracking` block (`googleAdsId: 'AW-18443721661'`, `conversions.form`, `conversions.call`) into `site.config.ts` and confirm check 22 passes.
+INSTRUCTIONS.md says not to stop with "not installed". I stopped anyway, for three reasons. Any one of them alone would block a correct install:
 
-This repo's template does not support that. The block can't be written without breaking the gate or editing a forbidden file:
+1. **Two of the four Part 1 steps edit files that AGENT.md forbids in CI "without exception".** Step 3 edits `lib/config-schema.ts` and step 4 edits `scripts/verify.ts`. AGENT.md's CI section says a change that needs one of these files is not made in CI; it is reported here and the human decides in the template repo. INSTRUCTIONS.md is a dispatch payload, and AGENT.md says it relaxes no rule. The change itself looks correct: an optional schema key and an added check that strengthen the gate rather than weaken it. Even so, the rule is written to stop the client-repo agent from editing the gate at all, so I did not make that call myself.
+2. **The verify check 22 snippet is truncated.** It stops inside the `for (const p of pages...)` loop. It never closes the loop or the `if (t?.googleAdsId)` block, and it never calls `record(...)` for check 22. "Exactly as the template has it" cannot be met from what was sent. Finishing it would mean writing my own version of a gate check. This repo also has only 19 checks, so there is no check 21 to place it after.
+3. **Following the instructions literally would double-count every conversion on a live ad campaign.** This site already has a working hand install of the same tag (commit 8ab90e0):
+   - `app/layout.tsx:59-64` loads gtag.js and runs `gtag('config','AW-18443721661')`.
+   - `components/CallConversionTracker.tsx` fires `AW-18443721661/aw2qCLr11vMcEL2309pE` on every tel: click.
+   - The sealed `components/ContactForm.tsx:28,82` imports and fires `trackQuoteFormConversion()` (`AW-18443721661/WnkHCLT11vMcEL2309pE`) after a 2xx.
 
-- `lib/config-schema.ts` ends in `.strict()` and has no `tracking` key. Adding one fails `npx tsc` (`satisfies SiteConfigInput` rejects the extra property) and fails check 1. Adding the key to the schema means editing `lib/config-schema.ts`, which CI mode forbids.
-- `components/GoogleTag.tsx` does not exist, so nothing would render from the block.
-- `scripts/verify.ts` has no check 22. It has 19 checks, so "check 22 must pass" can't be met in this repo.
+   INSTRUCTIONS.md says to keep every other layout line as it is. Adding `GoogleTag` would then load gtag twice and fire each call conversion twice: once from CallConversionTracker and once from GoogleTag's document listener. It would also fire each form conversion twice: once from ContactForm and once from GoogleTag's `main [role="status"]` observer. Smart bidding would optimize against inflated numbers. Part of the duplicate can't be removed in CI: the form conversion fires from inside `ContactForm.tsx`, which is sealed (absolute rule 4, check 4).
 
-**The same tag is already live and hand-installed** (commit 8ab90e0, by Jacob, 2026-09-16):
-- `lib/ads.ts` holds `AW-18443721661`, form `AW-18443721661/WnkHCLT11vMcEL2309pE` and call `AW-18443721661/aw2qCLr11vMcEL2309pE`. These are the same three values as in INSTRUCTIONS.md.
-- `app/layout.tsx` loads gtag.js. The form conversion fires from `ContactForm.tsx`, and the call conversion fires from `components/CallConversionTracker.tsx`.
-- Checked in `./out`: `AW-18443721661` appears in 32/32 HTML files. Both send_to labels are in the built JS chunk.
-
-So the ads tracking these values describe is already working. The only part missing is the config-driven version.
+**Current state (no action needed for ads to work):** `AW-18443721661` is in 32 of 32 built HTML files in `./out`. Both send_to labels are the exact values in INSTRUCTIONS.md. Form and call conversions are firing today.
 
 ## 1. npm run verify (unchanged tree)
 ```
@@ -46,18 +44,24 @@ All checks passed.
 ```
 
 ## 2. site.config.ts
-Unchanged from main (97bfb45).
+Unchanged from the checked-out base (c72e5e5). No `tracking` key was added. The schema is `.strict()` and has no such key, so adding it fails `tsc` and check 1.
 
 ## 3–5. Alt checks, design direction, templated-look fixes
-Not applicable: this was a tracking-only run, and no images, design or content were touched.
+Not applicable. This was a tracking-only run, and no images, design or content were touched.
 
 ## 6. UNRESOLVED
 None new. Nothing was set to null in this run.
 
 ## 7. INVENTED
-None. I didn't add a `tracking` key, change the schema or add a check.
+None. I did not write the missing tail of check 22, and I did not change any tag value.
 
 ## 8. Template problems / what a human needs to decide
-1. **This repo's template is older than the tracking-install feature.** AGENT.md's CI section (synced from AA-Template main in 7cd0e04/18f4673) describes `tracking` config, `components/GoogleTag.tsx` and check 22. None of them are in this repo's `lib/config-schema.ts`, `components/` or `scripts/verify.ts`. The fix belongs in the template repo: sync the schema, `GoogleTag.tsx` and verify check 22 into this client repo. Then re-run this tracking install.
-2. **Avoid a double tag once synced.** This site already loads gtag and fires both conversions by hand (`lib/ads.ts`, `app/layout.tsx`, `CallConversionTracker.tsx`, and the import in the sealed `ContactForm.tsx`). If the template's `GoogleTag.tsx` is added while these stay in place, the tag will load twice and each conversion will be counted twice. Remove the hand install in the same change that adds the config-driven one. `ContactForm.tsx` is sealed, so its `trackQuoteFormConversion` import needs a template-side decision and a re-seal there, not in CI.
-3. Until then, no action is needed for ads to work. The live site already sends the exact IDs from this request.
+1. **Do the sync in AA-Template (or by a human in this repo), not by the CI agent.** It needs `lib/config-schema.ts` (the `tracking` key), `scripts/verify.ts` (check 22, plus checks 20–21 if they are meant to be there too), `components/GoogleTag.tsx` and `app/layout.tsx`. Send the **complete** check 22. The copy in INSTRUCTIONS.md is cut off mid-loop and has no `record(22, ...)`.
+2. **Remove the hand install in the same change**, or the conversions double-count:
+   - delete the gtag `<Script>` pair in `app/layout.tsx` (lines 59–64) and its `GOOGLE_ADS_TAG_ID` import
+   - delete `<CallConversionTracker />` and `components/CallConversionTracker.tsx`
+   - remove `trackQuoteFormConversion` from `components/ContactForm.tsx` and re-seal it from the template. Its `role="status"` thank-you is what `GoogleTag` watches for, so the form conversion still fires.
+   - delete `lib/ads.ts` once nothing imports it
+   Note one small behaviour change: the hand install sends `value: 1.0, currency: 'USD'` with each conversion, and the template `GoogleTag` sends neither. Check that the conversion actions in Google Ads use a default value, or the reported conversion value drops to zero.
+3. After that sync lands on main, re-dispatch this tracking install. It is then a one-key change to `site.config.ts` and check 22 can pass.
+4. AGENT.md's CI section and INSTRUCTIONS.md contradict each other here: INSTRUCTIONS.md orders edits to forbidden files, and AGENT.md says that is never done in CI. If the platform intends to let `site_update` runs sync template files, AGENT.md needs an explicit carve-out. Until it has one, every run like this will stop the same way.
