@@ -66,6 +66,12 @@ export default async function PrivacyPolicyPage() {
           arrived from one of our ads and whether you then sent the contact form or tapped a phone number to call us. We use
           this only to measure how our advertising performs. Google handles that data under its own privacy policy.
         </p>
+        <p className="mt-4">
+          We count visits to this site without cookies: we log the page viewed, the site that linked here, ad campaign tags and an approximate location (country, region and city), and we never store your IP address.
+        </p>
+        <p className="mt-4">
+          If you click OK on the cookie banner, we also use PostHog to record how you use this site (clicks, scrolling and a replay of your visit, with anything you type hidden); you can change your choice at any time with the Cookie settings link at the bottom of every page, and if your browser sends a Global Privacy Control signal we leave this off.
+        </p>
 
         <h2 className="mt-10 font-heading text-2xl font-bold text-primary-dark">Your choices</h2>
         <p className="mt-4">
